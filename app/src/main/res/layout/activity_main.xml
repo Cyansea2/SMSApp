@@ -54,4 +54,10 @@
         android:layout_height="wrap_content"
         android:text="@string/send" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Send" />
+
 </LinearLayout>

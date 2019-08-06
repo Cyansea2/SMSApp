@@ -2,9 +2,11 @@ package sg.edu.rp.c346.smsapp;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText et1;
     EditText et2;
     Button bt1;
+    Button bt2;
     BroadcastReceiver br;
 
     @Override
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         et1 = findViewById(R.id.editText1);
         et2 = findViewById(R.id.editText2);
         bt1 = findViewById(R.id.button);
+        bt2 = findViewById(R.id.button2);
         br = new MsgReceiver();
 
         checkPermission();
@@ -52,6 +56,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String to = et1.getText().toString();
+                String msg = et2.getText().toString();
+
+                Uri smsUri = Uri.parse("sms: " + to);
+                Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
+                intent.putExtra("adress",to);
+                intent.putExtra("sms_body", msg);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
 
     }
     private void checkPermission() {
